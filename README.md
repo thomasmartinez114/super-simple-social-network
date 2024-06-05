@@ -2,8 +2,8 @@
 
 ## Backend
 
-### Node.js
+Node.js
 
 ## Frontend
 
-### Vite/React
+Vite/React
