@@ -27,7 +27,7 @@ const Navbar = () => {
           </li>
           <li className="nav-item">
             <a className="nav-link" href="#">
-              Sign In
+              Create Post
             </a>
           </li>
         </ul>

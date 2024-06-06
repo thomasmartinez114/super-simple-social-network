@@ -32,14 +32,16 @@ const PostsAll = () => {
     <div className="container">
       <br />
       <button type="button" className="btn btn-success">
-        + Add
+        + Add New Post
       </button>
       <div className="row">
         {posts.map((post) => (
           <div key={post.id} className="col-md-6 mb-4 mt-4">
             <div className="card">
               <div className="card-body">
-                <h6 className="card-subtitle mb-2 text-muted">{post.id}</h6>
+                <a href={`/users/${post.username}`} className="card-link">
+                  {post.username}
+                </a>
                 <p className="card-text">{post.content}</p>
                 <a href="#" className="card-link" onClick={handleLike}>
                   <FaRegThumbsUp />
