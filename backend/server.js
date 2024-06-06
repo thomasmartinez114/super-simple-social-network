@@ -35,7 +35,7 @@ db.connect((err) => {
 
 // GET All Users
 app.get("/api/users", (req, res) => {
-  console.log("Endpoint: All Users")
+  // console.log("Endpoint: All Users")
 
   // query
   const query = "SELECT username FROM users ORDER BY username ASC"
@@ -52,10 +52,10 @@ app.get("/api/users", (req, res) => {
 
 // GET All Posts
 app.get("/api/posts", (req, res) => {
-  console.log("Endpoint: All Posts")
+  // console.log("Endpoint: All Posts")
 
   // query
-  const query = "SELECT * FROM posts ORDER BY id ASC"
+  const query = "SELECT * FROM posts ORDER BY id DESC"
 
   db.query(query, (err, results) => {
     if (err) {
