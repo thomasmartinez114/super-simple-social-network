@@ -37,9 +37,11 @@ const PostsAll = () => {
                 <p className="card-text">{post.content}</p>
                 <a href="#" className="card-link" onClick={handleLike}>
                   <FaRegThumbsUp />
+                  {post.likes}
                 </a>
                 <a href="#" className="card-link" onClick={handleDislike}>
                   <FaRegThumbsDown />
+                  {post.dislikes}
                 </a>
               </div>
             </div>
