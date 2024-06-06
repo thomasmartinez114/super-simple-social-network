@@ -7,3 +7,6 @@ Node.js
 ## Frontend
 
 Vite/React
+
+- Dependencies:
+  - axios
