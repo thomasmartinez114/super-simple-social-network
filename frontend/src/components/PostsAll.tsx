@@ -30,7 +30,7 @@ const PostsAll = () => {
     <div className="container">
       <div className="row">
         {posts.map((post) => (
-          <div key={post.id} className="col-md-4 mb-4">
+          <div key={post.id} className="col-md-6 mb-4 mt-4">
             <div className="card">
               <div className="card-body">
                 <h6 className="card-subtitle mb-2 text-muted">{post.id}</h6>

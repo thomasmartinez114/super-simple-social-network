@@ -4,7 +4,7 @@ const Navbar = () => {
   return (
     <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
       <a className="navbar-brand" href="#">
-        Navbar
+        SSSN
       </a>
       <button
         className="navbar-toggler"
@@ -27,12 +27,7 @@ const Navbar = () => {
           </li>
           <li className="nav-item">
             <a className="nav-link" href="#">
-              Link
-            </a>
-          </li>
-          <li className="nav-item">
-            <a className="nav-link disabled" href="#">
-              Disabled
+              Sign In
             </a>
           </li>
         </ul>
