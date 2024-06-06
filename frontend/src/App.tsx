@@ -1,11 +1,12 @@
 import { useState } from "react"
 import "./App.css"
+import Navbar from "./components/Navbar"
 import PostsAll from "./components/PostsAll"
 
 function App() {
   return (
     <>
-      <h3>Navbar</h3>
+      <Navbar />
       <PostsAll />
       <h3>Footer</h3>
     </>
