@@ -4,6 +4,8 @@ import { FaRegThumbsUp, FaRegThumbsDown } from "react-icons/fa"
 
 const PostsAll = () => {
   const [posts, setPosts] = useState([])
+  const [likes, setLikes] = useState()
+  const [dislikes, setDislikes] = useState()
 
   useEffect(() => {
     const fetchAllPosts = async () => {
@@ -19,7 +21,7 @@ const PostsAll = () => {
   }, [])
 
   const handleLike = () => {
-    alert("Post has been Liked")
+    // alert("Post has been Liked")
   }
 
   const handleDislike = () => {
@@ -28,6 +30,10 @@ const PostsAll = () => {
 
   return (
     <div className="container">
+      <br />
+      <button type="button" className="btn btn-success">
+        + Add
+      </button>
       <div className="row">
         {posts.map((post) => (
           <div key={post.id} className="col-md-6 mb-4 mt-4">
