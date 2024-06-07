@@ -1,11 +1,5 @@
 import React, { useEffect, useState } from "react"
-import List from "@mui/material/List"
-import ListItem from "@mui/material/ListItem"
-import Divider from "@mui/material/Divider"
-import ListItemText from "@mui/material/ListItemText"
-import ListItemAvatar from "@mui/material/ListItemAvatar"
-import Avatar from "@mui/material/Avatar"
-import Typography from "@mui/material/Typography"
+import { Link } from "react-router-dom"
 import axios from "axios"
 import { FaRegThumbsUp, FaRegThumbsDown } from "react-icons/fa"
 
@@ -57,14 +51,16 @@ const PostsAll = () => {
             </div>
           </div>
         </form>
+        {/* End of Post Bar */}
 
+        {/* Posts - All */}
         <div className="row">
           {posts.map((post) => (
             <div key={post.id} className="col-md-12 mb-4 mt-4">
               <div className="card">
                 <div className="card-body">
                   <h6 className="card-subtitle mb-2 text-muted">
-                    {post.username}
+                    <Link to={`/users/${post.username}`}>{post.username}</Link>
                   </h6>
                   <p className="card-text">{post.content}</p>
                 </div>
@@ -85,6 +81,7 @@ const PostsAll = () => {
             </div>
           ))}
         </div>
+        {/* End of Posts All */}
       </div>
     </>
   )
