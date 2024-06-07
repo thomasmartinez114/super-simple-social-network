@@ -27,13 +27,13 @@ const PostsAll = () => {
     fetchAllPosts()
   }, [])
 
-  //   const handleLike = () => {
-  //     // alert("Post has been Liked")
-  //   }
+  const handleLike = () => {
+    alert("Post has been Liked")
+  }
 
-  //   const handleDislike = () => {
-  //     alert("Post has been Disliked")
-  //   }
+  const handleDislike = () => {
+    alert("Post has been Disliked")
+  }
 
   return (
     <>
@@ -63,16 +63,18 @@ const PostsAll = () => {
             <div key={post.id} className="col-md-12 mb-4 mt-4">
               <div className="card">
                 <div className="card-body">
-                  <h6 className="card-subtitle mb-2 text-muted">{post.id}</h6>
+                  <h6 className="card-subtitle mb-2 text-muted">
+                    {post.username}
+                  </h6>
                   <p className="card-text">{post.content}</p>
                 </div>
                 <div className="post-footer">
                   <div className="post-footer-interactions">
-                    <a href="#" className="card-link">
+                    <a href="#" className="card-link" onClick={handleLike}>
                       <FaRegThumbsUp />
                       {post.likes}
                     </a>
-                    <a href="#" className="card-link">
+                    <a href="#" className="card-link" onClick={handleDislike}>
                       <FaRegThumbsDown />
                       {post.dislikes}
                     </a>
