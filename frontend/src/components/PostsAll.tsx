@@ -17,7 +17,7 @@ const PostsAll = () => {
   useEffect(() => {
     const fetchAllPosts = async () => {
       try {
-        const res = await axios.get("http://localhost:3000/api/posts")
+        const res = await axios.get("http://localhost:3000/api/posts/all")
         console.log(res.data)
         setPosts(res.data)
       } catch (err) {

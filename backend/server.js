@@ -51,7 +51,7 @@ app.get("/api/users", (req, res) => {
 })
 
 // GET All Posts
-app.get("/api/posts", (req, res) => {
+app.get("/api/posts/all", (req, res) => {
   // console.log("Endpoint: All Posts")
 
   // query
@@ -63,6 +63,27 @@ app.get("/api/posts", (req, res) => {
       res.status(500).send("Server error")
       return
     }
+    res.json(results)
+  })
+})
+
+// GET User Posts
+app.get("/api/user/:username/posts", (req, res) => {
+  const username = req.params.username
+
+  const query = "SELECT * FROM posts WHERE username = ?"
+  db.query(query, [username], (err, results) => {
+    if (err) {
+      console.error("Error executing query:", err)
+      res.status(500).send("Server error")
+      return
+    }
+
+    if (results.length === 0) {
+      res.status(404).send("User not found")
+      return
+    }
+
     res.json(results)
   })
 })
