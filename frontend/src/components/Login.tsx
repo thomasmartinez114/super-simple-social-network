@@ -39,6 +39,7 @@ const Login = () => {
       if (response.status === 200) {
         // Handle successful login
         setSuccess(true)
+        localStorage.setItem("loggedUsername", username) // save username to localstorage
         navigate("/") // Navigate to the dashboard
       }
     } catch (error) {
