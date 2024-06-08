@@ -13,10 +13,12 @@ Node.js (node server.js)
 
 ## Frontend
 
-Vite/React (npm run dev)
+Vite/React (npm run start_full_app [concurrently command])
 
 - Dependencies:
   - axios
   - Moment (date and time format)
   - React-router-dom
   - react-icons
+  - concurrently
+    - updated the package.json
