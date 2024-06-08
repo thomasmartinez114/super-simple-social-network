@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react"
 import { Link } from "react-router-dom"
 import axios from "axios"
 import { FaRegThumbsUp, FaRegThumbsDown } from "react-icons/fa"
-import Moment from "react-moment"
+import moment from "moment"
 
 const PostsAll = () => {
   const [posts, setPosts] = useState([])
@@ -77,9 +77,7 @@ const PostsAll = () => {
                     </a>
                   </div>
                   <div className="post-footer-timestamp">
-                    <Moment format="YYYY/MM/DD HH:mm:ss">
-                      {post.created_at}
-                    </Moment>
+                    {moment(post.created_at).format("YYYY/MM/DD HH:mm:ss")}
                   </div>
                 </div>
               </div>

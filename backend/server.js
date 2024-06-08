@@ -95,7 +95,7 @@ app.get("/api/posts/all", (req, res) => {
   console.log("GET: All Posts")
 
   // query
-  const query = "SELECT * FROM posts ORDER BY id DESC"
+  const query = "SELECT * FROM posts ORDER BY created_at DESC"
 
   db.query(query, (err, results) => {
     if (err) {
