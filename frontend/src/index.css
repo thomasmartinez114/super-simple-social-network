@@ -99,3 +99,24 @@ button:focus-visible {
 .post-footer-timestamp {
   color: #a5a5a5;
 }
+
+/* Login Form */
+
+.login-form {
+  display: flex;
+  justify-content: center;
+  margin: 5px;
+  text-align: center;
+
+  /* border: 2px solid black; */
+}
+
+.login-form-username {
+  padding: 20px;
+  /* border: 2px solid black; */
+}
+
+.login-form-password {
+  padding: 20px;
+  /* border: 2px solid black; */
+}

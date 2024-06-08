@@ -33,9 +33,46 @@ db.connect((err) => {
 //    ROUTES       //
 /////////////////////
 
+// POST Login
+app.post("/api/login", (req, res) => {
+  console.log("Received request:", req.body) // Debugging log
+  const { username, password } = req.body // Destructure data submitted on form
+
+  // Check if username and password are provided
+  if (!username || !password) {
+    return res.status(400).json({ error: "Username and password are required" })
+  }
+
+  const query = `SELECT * FROM users WHERE username = ?`
+
+  db.query(query, [username], (err, results) => {
+    if (err) {
+      return res.status(500).json({ error: "Database query error" })
+    }
+
+    if (results.length === 0) {
+      return res.status(401).json({ error: "Invalid username or password" })
+    }
+
+    const loginDetails = results[0]
+
+    // If username matches username in result obj and password match
+    if (
+      username === loginDetails.username &&
+      password === loginDetails.password
+    ) {
+      console.log(`User ${username} has logged in`)
+      res.status(200).json({ message: "Login successful" })
+    } else {
+      console.log("Failed Login Attempt!")
+      res.status(401).json({ error: "Invalid username or password" })
+    }
+  })
+})
+
 // GET All Users
 app.get("/api/users/all", (req, res) => {
-  // console.log("Endpoint: All Users")
+  console.log("GET: All Users")
 
   // query
   const query = "SELECT username FROM users ORDER BY username ASC"
@@ -52,7 +89,7 @@ app.get("/api/users/all", (req, res) => {
 
 // GET All Posts
 app.get("/api/posts/all", (req, res) => {
-  // console.log("Endpoint: All Posts")
+  console.log("GET: All Posts")
 
   // query
   const query = "SELECT * FROM posts ORDER BY id DESC"
@@ -70,6 +107,7 @@ app.get("/api/posts/all", (req, res) => {
 // GET :username Posts
 app.get("/api/user/:username/posts", (req, res) => {
   const username = req.params.username
+  console.log(`GET: User ${username} Posts`)
 
   const query = "SELECT * FROM posts WHERE username = ?"
   db.query(query, [username], (err, results) => {
