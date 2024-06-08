@@ -1,14 +1,14 @@
 import React from "react"
-import { Outlet } from "react-router-dom"
 import Navbar from "../components/Navbar"
+import PostsAll from "../components/PostsAll"
 
-const MainLayout = () => {
+const HomePage = () => {
   return (
     <>
       <Navbar />
-      <Outlet />
+      <PostsAll />
     </>
   )
 }
 
-export default MainLayout
+export default HomePage

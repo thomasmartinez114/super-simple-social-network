@@ -34,7 +34,7 @@ db.connect((err) => {
 /////////////////////
 
 // GET All Users
-app.get("/api/users", (req, res) => {
+app.get("/api/users/all", (req, res) => {
   // console.log("Endpoint: All Users")
 
   // query
@@ -67,7 +67,7 @@ app.get("/api/posts/all", (req, res) => {
   })
 })
 
-// GET User Posts
+// GET :username Posts
 app.get("/api/user/:username/posts", (req, res) => {
   const username = req.params.username
 

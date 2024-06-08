@@ -1,14 +1,15 @@
 import React from "react"
 import Navbar from "../components/Navbar"
-import PostsAll from "../components/PostsAll"
 
-const Home = () => {
+const LoginPage = () => {
   return (
     <>
       <Navbar />
-      <PostsAll />
+      <div>
+        <h3>Login Page</h3>
+      </div>
     </>
   )
 }
 
-export default Home
+export default LoginPage

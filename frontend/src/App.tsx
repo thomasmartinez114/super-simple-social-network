@@ -1,14 +1,16 @@
 import "./App.css"
-import Home from "./pages/Home"
+import HomePage from "./pages/HomePage"
 import { BrowserRouter, Routes, Route } from "react-router-dom"
-import User from "./pages/User"
+import UserPage from "./pages/UserPage"
+import LoginPage from "./pages/LoginPage"
 
 const App = () => {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/users/:username" element={<User />} />
+        <Route path="/" element={<HomePage />} />
+        <Route path="/login" element={<LoginPage />} />
+        <Route path="/users/:username" element={<UserPage />} />
       </Routes>
     </BrowserRouter>
   )
