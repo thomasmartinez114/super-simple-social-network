@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react"
 import { Link } from "react-router-dom"
 import axios from "axios"
 import { FaRegThumbsUp, FaRegThumbsDown } from "react-icons/fa"
+import Moment from "react-moment"
 
 const PostsAll = () => {
   const [posts, setPosts] = useState([])
@@ -75,7 +76,11 @@ const PostsAll = () => {
                       {post.dislikes}
                     </a>
                   </div>
-                  <div className="post-footer-timestamp">{post.created_at}</div>
+                  <div className="post-footer-timestamp">
+                    <Moment format="YYYY/MM/DD HH:mm:ss">
+                      {post.created_at}
+                    </Moment>
+                  </div>
                 </div>
               </div>
             </div>

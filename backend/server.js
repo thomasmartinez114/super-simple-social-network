@@ -38,7 +38,7 @@ db.connect((err) => {
 
 // POST Login
 app.post("/api/login", (req, res) => {
-  console.log("Received request:", req.body) // Debugging log
+  // console.log("Received request:", req.body) // Debugging log
   const { username, password } = req.body // Destructure data submitted on form
 
   // Check if username and password are provided
