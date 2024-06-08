@@ -9,6 +9,9 @@ const app = express()
 // use cors middleware
 app.use(cors())
 
+// Middleware to parse JSON bodies
+app.use(express.json()) // This must be before any routes
+
 // MySQL Configuration
 const HOST = process.env.DB_HOST
 const DBUSERNAME = process.env.DB_USER
