@@ -25,8 +25,9 @@ const UserPage = () => {
   return (
     <>
       <Navbar />
-      <h2>{username}'s Posts</h2>
+
       <div className="container">
+        <h2 className="profile-username">{username} Posts</h2>
         <br />
         <div className="row">
           {posts.map((post) => (

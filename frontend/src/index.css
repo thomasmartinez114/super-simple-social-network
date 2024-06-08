@@ -67,6 +67,8 @@ button:focus-visible {
   }
 }
 
+/* Posts */
+
 .card {
   /* max-width: 500px; */
   border: 2px solid #ccc;
@@ -119,4 +121,12 @@ button:focus-visible {
 .login-form-password {
   padding: 20px;
   /* border: 2px solid black; */
+}
+
+/* Profile */
+
+.profile-username {
+  display: flex;
+  margin-top: 20px;
+  margin-bottom: -20px;
 }
