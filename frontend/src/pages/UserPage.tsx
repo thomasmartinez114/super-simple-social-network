@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react"
 import { useParams } from "react-router-dom"
 import axios from "axios"
 import Navbar from "../components/Navbar"
+import defaultPhoto from "../images/default-user-photo.jpg"
 
 const UserPage = () => {
   const { username } = useParams()
@@ -25,8 +26,12 @@ const UserPage = () => {
   return (
     <>
       <Navbar />
-      <h2>{username}'s Posts</h2>
+
       <div className="container">
+        <div className="user-profile-header">
+          <h2>{username}'s Profile</h2>
+          <img src={defaultPhoto} alt="" className="user-profile-photo" />
+        </div>
         <br />
         <div className="row">
           {posts.map((post) => (

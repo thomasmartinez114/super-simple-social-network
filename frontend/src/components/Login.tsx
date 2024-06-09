@@ -40,7 +40,7 @@ const Login = () => {
         // Handle successful login
         setSuccess(true)
         localStorage.setItem("loggedUsername", username) // save username to localstorage
-        navigate("/") // Navigate to the dashboard
+        navigate(`/users/${username}`) // Navigate to the dashboard
       }
     } catch (error) {
       // Handle login error

@@ -9,6 +9,7 @@ const HomePage = () => {
   return (
     <>
       <Navbar />
+      <p>{loggedUser}</p>
       <PostsAll />
     </>
   )
