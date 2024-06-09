@@ -67,6 +67,12 @@ button:focus-visible {
   }
 }
 
+/* postbar */
+
+.postbar {
+  margin-top: 20px;
+}
+
 .card {
   /* max-width: 500px; */
   border: 2px solid #ccc;

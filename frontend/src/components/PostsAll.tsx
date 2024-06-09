@@ -33,27 +33,6 @@ const PostsAll = () => {
   return (
     <>
       <div className="container">
-        <br />
-
-        {/* Post Bar */}
-        <form>
-          <div className="form-group">
-            {/* <label for="exampleFormControlTextarea1">Example textarea</label> */}
-            <textarea
-              className="form-control"
-              id="exampleFormControlTextarea1"
-              rows="2"
-              placeholder="What's on your mind?"
-            ></textarea>
-            <div id="post-button">
-              <button type="button" className="btn btn-success">
-                + Add
-              </button>
-            </div>
-          </div>
-        </form>
-        {/* End of Post Bar */}
-
         {/* Posts - All */}
         <div className="row">
           {posts.map((post) => (
