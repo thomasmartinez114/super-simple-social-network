@@ -14,11 +14,18 @@ const Navbar = () => {
             </a>
           </li>
           {localStorage.getItem("loggedUsername") ? (
-            <li className="nav-item">
-              <a className="nav-link" href="/logout">
-                Logout
-              </a>
-            </li>
+            <React.Fragment>
+              <li className="nav-item">
+                <a className="nav-link" href="/myprofile">
+                  My Profile
+                </a>
+              </li>
+              <li className="nav-item">
+                <a className="nav-link" href="/logout">
+                  Logout
+                </a>
+              </li>
+            </React.Fragment>
           ) : (
             <li className="nav-item">
               <a className="nav-link" href="/login">
