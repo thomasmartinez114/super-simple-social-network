@@ -9,6 +9,9 @@ const app = express()
 // use cors middleware
 app.use(cors())
 
+// Parse JSON request bodies
+app.use(bodyParser.json())
+
 // Middleware to parse JSON bodies
 app.use(express.json()) // This must be before any routes
 
@@ -126,6 +129,33 @@ app.get("/api/user/:username/posts", (req, res) => {
     }
 
     res.json(results)
+  })
+})
+
+// POST Content
+app.post("/api/addPost", (req, res) => {
+  const { username, content } = req.body
+  // // log data
+  // console.log(`Content posted by ${username}: ${content}`)
+  // // status to client
+  // res.status(201).json({ message: "Content posted successfully" })
+
+  // Validate input
+  if (!username || !content) {
+    return res.status(400).json({ message: "Invalid request data" })
+  }
+
+  // Insert data into the MySQL database
+  const query = "INSERT INTO posts (username, content) VALUES (?, ?)"
+  db.query(query, [username, content], (err, result) => {
+    if (err) {
+      console.error("Error inserting data into the database:", err.stack)
+      return res.status(500).json({ message: "Database insertion failed" })
+    }
+    console.log(`Content posted by ${username}: ${content}`)
+    res
+      .status(201)
+      .json({ message: "Content posted successfully", id: result.insertId })
   })
 })
 
