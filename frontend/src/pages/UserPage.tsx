@@ -5,7 +5,8 @@ import Navbar from "../components/Navbar"
 import defaultPhoto from "../images/default-user-photo.jpg"
 
 const UserPage = () => {
-  const { username } = useParams()
+  const username = localStorage.getItem("loggedUsername")
+  // const { username } = useParams()
   const [posts, setPosts] = useState([])
 
   useEffect(() => {
