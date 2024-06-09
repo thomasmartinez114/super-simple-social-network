@@ -6,8 +6,6 @@ import moment from "moment"
 
 const PostsAll = () => {
   const [posts, setPosts] = useState([])
-  const [likes, setLikes] = useState()
-  const [dislikes, setDislikes] = useState()
 
   useEffect(() => {
     const fetchAllPosts = async () => {
@@ -22,12 +20,27 @@ const PostsAll = () => {
     fetchAllPosts()
   }, [])
 
-  const handleLike = () => {
-    alert("Post has been Liked")
+  const handleLike = async (postId) => {
+    try {
+      await axios.post(`http://localhost:3000/api/posts/${postId}/like`)
+      console.log("Post has been liked")
+    } catch (err) {
+      console.error("Error liking post:", err)
+    }
   }
 
-  const handleDislike = () => {
-    alert("Post has been Disliked")
+  const handleDislike = async (postId) => {
+    try {
+      await axios.post(`http://localhost:3000/api/posts/${postId}/dislike`)
+      setPosts((prevPosts) =>
+        prevPosts.map((post) =>
+          post.id === postId ? { ...post, dislikes: post.dislikes + 1 } : post
+        )
+      )
+      alert("Post has been disliked")
+    } catch (err) {
+      console.error("Error disliking post:", err)
+    }
   }
 
   return (
@@ -46,11 +59,19 @@ const PostsAll = () => {
                 </div>
                 <div className="post-footer">
                   <div className="post-footer-interactions">
-                    <a href="#" className="card-link" onClick={handleLike}>
+                    <a
+                      href="#"
+                      className="card-link"
+                      onClick={() => handleLike(post.id)}
+                    >
                       <FaRegThumbsUp />
                       {post.likes}
                     </a>
-                    <a href="#" className="card-link" onClick={handleDislike}>
+                    <a
+                      href="#"
+                      className="card-link"
+                      onClick={() => handleDislike(post.id)}
+                    >
                       <FaRegThumbsDown />
                       {post.dislikes}
                     </a>

@@ -159,6 +159,30 @@ app.post("/api/addPost", (req, res) => {
   })
 })
 
+// Increment likes
+app.post("/api/posts/:id/like", (req, res) => {
+  const postId = req.params.id
+  const query = "UPDATE posts SET likes = likes + 1 WHERE id = ?"
+  connection.query(query, [postId], (err, results) => {
+    if (err) {
+      return res.status(500).json({ message: "Database update failed" })
+    }
+    res.json({ message: "Like updated successfully" })
+  })
+})
+
+// Increment dislikes
+app.post("/api/posts/:id/dislike", (req, res) => {
+  const postId = req.params.id
+  const query = "UPDATE posts SET dislikes = dislikes + 1 WHERE id = ?"
+  connection.query(query, [postId], (err, results) => {
+    if (err) {
+      return res.status(500).json({ message: "Database update failed" })
+    }
+    res.json({ message: "Dislike updated successfully" })
+  })
+})
+
 app.listen(PORT, () => {
   console.log(`Node.js server running at http://localhost:${PORT}`)
 })
