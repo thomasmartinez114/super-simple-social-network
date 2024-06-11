@@ -28,6 +28,7 @@ const PostBar = () => {
       if (response.status === 200 || response.status === 201) {
         console.log(`Content posted by ${username}`)
         setContent("") // clear the textarea
+        window.location.reload() // refresh the page when successfull
       } else {
         console.log("Faield to post content")
       }
