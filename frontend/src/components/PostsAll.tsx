@@ -21,12 +21,12 @@ const PostsAll = () => {
   }, [])
 
   const handleLike = async (postId) => {
-    // try {
-    //   await axios.post(`http://localhost:3000/api/posts/${postId}/like`)
-    //   console.log("Post has been liked")
-    // } catch (err) {
-    //   console.error("Error liking post:", err)
-    // }
+    try {
+      await axios.post(`http://localhost:3000/api/posts/${postId}/like`)
+      console.log("Post has been liked")
+    } catch (err) {
+      console.error("Error liking post:", err)
+    }
 
     alert(`Liked Post ID: ${postId}`)
   }
