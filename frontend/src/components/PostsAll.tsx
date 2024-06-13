@@ -10,7 +10,7 @@ const PostsAll = () => {
   useEffect(() => {
     const fetchAllPosts = async () => {
       try {
-        const res = await axios.get("http://localhost:3000/api/posts/all")
+        const res = await axios.get("http://localhost:3001/api/posts/all")
         console.log(res.data)
         setPosts(res.data)
       } catch (err) {
@@ -22,7 +22,7 @@ const PostsAll = () => {
 
   const handleLike = async (postId) => {
     try {
-      await axios.post(`http://localhost:3000/api/posts/${postId}/like`)
+      await axios.post(`http://localhost:3001/api/posts/${postId}/like`)
       console.log("Post has been liked")
     } catch (err) {
       console.error("Error liking post:", err)
@@ -32,17 +32,17 @@ const PostsAll = () => {
   }
 
   const handleDislike = async (postId) => {
-    try {
-      await axios.post(`http://localhost:3000/api/posts/${postId}/dislike`)
-      setPosts((prevPosts) =>
-        prevPosts.map((post) =>
-          post.id === postId ? { ...post, dislikes: post.dislikes + 1 } : post
-        )
-      )
-      alert("Post has been disliked")
-    } catch (err) {
-      console.error("Error disliking post:", err)
-    }
+    // try {
+    //   await axios.post(`http://localhost:3001/api/posts/${postId}/dislike`)
+    //   setPosts((prevPosts) =>
+    //     prevPosts.map((post) =>
+    //       post.id === postId ? { ...post, dislikes: post.dislikes + 1 } : post
+    //     )
+    //   )
+    //   alert("Post has been disliked")
+    // } catch (err) {
+    //   console.error("Error disliking post:", err)
+    // }
 
     alert(`Disliked Post ID: ${postId}`)
   }

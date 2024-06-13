@@ -13,7 +13,7 @@ const UserPage = () => {
     const fetchUserPosts = async () => {
       try {
         const res = await axios.get(
-          `http://localhost:3000/api/user/${username}/posts`
+          `http://localhost:3001/api/user/${username}/posts`
         )
         console.log(res.data)
         setPosts(res.data)

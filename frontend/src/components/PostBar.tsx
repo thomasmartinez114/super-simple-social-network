@@ -9,7 +9,7 @@ const PostBar = () => {
     e.preventDefault()
     // alert(`content posted by ${username}`)
 
-    const apiEndpoint = "http://localhost:3000/api/addPost"
+    const apiEndpoint = "http://localhost:3001/api/addPost"
 
     const payload = {
       username: username,
