@@ -4,6 +4,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom"
 import UserPage from "./pages/UserPage"
 import LoginPage from "./pages/LoginPage"
 import LogoutPage from "./pages/LogoutPage"
+import User from "./pages/User"
 
 const App = () => {
   return (
@@ -14,6 +15,7 @@ const App = () => {
         <Route path="/login" element={<LoginPage />} />
         <Route path="/logout" element={<LogoutPage />} />
         <Route path="/myprofile" element={<UserPage />} />
+        <Route path="/users/:username" element={<User />} />
       </Routes>
     </BrowserRouter>
   )
