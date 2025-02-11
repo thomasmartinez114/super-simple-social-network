@@ -6,7 +6,7 @@ const PORT = process.env.PORT;
 const express = require('express'); // init express server
 const app = express();
 
-// use cors middleware
+// use cors middleware.
 app.use(cors());
 
 // Parse JSON request bodies
