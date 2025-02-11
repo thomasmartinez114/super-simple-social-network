@@ -1,0 +1,50 @@
+:root {
+  /* Modern Color Palette */
+  --primary: #3498db;
+  --primary-dark: #2980b9;
+  --secondary: #2ecc71;
+  --background: #f8f9fa;
+  --surface: #ffffff;
+  --text-primary: #2c3e50;
+  --text-secondary: #7f8c8d;
+  --error: #e74c3c;
+  --success: #27ae60;
+  --warning: #f1c40f;
+  
+  /* Spacing */
+  --spacing-xs: 0.25rem;
+  --spacing-sm: 0.5rem;
+  --spacing-md: 1rem;
+  --spacing-lg: 1.5rem;
+  --spacing-xl: 2rem;
+
+  /* Border Radius */
+  --border-radius: 8px;
+  --border-radius-lg: 12px;
+
+  /* Shadows */
+  --shadow-sm: 0 2px 4px rgba(0,0,0,0.1);
+  --shadow-md: 0 4px 6px rgba(0,0,0,0.1);
+  --shadow-lg: 0 10px 15px rgba(0,0,0,0.1);
+
+  /* Additional Border Radius */
+  --border-radius-sm: 6px;
+  
+  /* Additional Spacing */
+  --spacing-2xs: 0.125rem;
+  
+  /* Mobile Breakpoints */
+  --mobile-width: 768px;
+  --tablet-width: 1024px;
+}
+
+/* Add some base mobile-friendly styles */
+@media (max-width: 768px) {
+  html {
+    font-size: 14px;
+  }
+  
+  body {
+    -webkit-tap-highlight-color: transparent;
+  }
+} 

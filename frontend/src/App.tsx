@@ -5,6 +5,8 @@ import UserPage from "./pages/UserPage"
 import LoginPage from "./pages/LoginPage"
 import LogoutPage from "./pages/LogoutPage"
 import User from "./pages/User"
+import './styles/theme.css';
+import './styles/global.css';
 
 const App = () => {
   return (

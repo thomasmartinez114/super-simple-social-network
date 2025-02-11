@@ -185,6 +185,29 @@ app.post('/api/posts/:id/dislike', (req, res) => {
   });
 });
 
+// Add this new endpoint to get user stats
+app.get('/api/users/:username/stats', async (req, res) => {
+  const { username } = req.params;
+  
+  try {
+    // Get posts count
+    const postsCountQuery = 'SELECT COUNT(*) as count FROM posts WHERE username = ?';
+    const [postsResult] = await db.query(postsCountQuery, [username]);
+    
+    // Get total likes received
+    const likesQuery = 'SELECT SUM(likes) as total FROM posts WHERE username = ?';
+    const [likesResult] = await db.query(likesQuery, [username]);
+    
+    res.json({
+      postsCount: postsResult[0].count || 0,
+      likesReceived: likesResult[0].total || 0
+    });
+  } catch (error) {
+    console.error('Error fetching user stats:', error);
+    res.status(500).json({ error: 'Error fetching user stats' });
+  }
+});
+
 app.listen(PORT, () => {
   console.log(`Node.js server running at http://localhost:${PORT}`);
 });

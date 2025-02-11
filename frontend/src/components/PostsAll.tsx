@@ -1,37 +1,126 @@
-import React, { useEffect, useState } from "react"
-import { Link } from "react-router-dom"
-import axios from "axios"
-import { FaRegThumbsUp, FaRegThumbsDown } from "react-icons/fa"
-import moment from "moment"
+import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
+import axios from 'axios';
+import { FaRegThumbsUp, FaRegThumbsDown } from 'react-icons/fa';
+import moment from 'moment';
+import styled from 'styled-components';
+
+const PostsContainer = styled.div`
+  max-width: 800px;
+  margin: 0 auto;
+  padding: var(--spacing-md);
+  
+  @media (max-width: 768px) {
+    padding: var(--spacing-sm);
+  }
+`;
+
+const PostCard = styled.div`
+  background: var(--surface);
+  padding: var(--spacing-lg);
+  border-radius: var(--border-radius);
+  box-shadow: var(--shadow-sm);
+  margin-bottom: var(--spacing-md);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  
+  @media (max-width: 768px) {
+    padding: var(--spacing-md);
+    margin: 0 var(--spacing-sm) var(--spacing-md);
+    border-radius: var(--border-radius-sm);
+  }
+  
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
+  }
+`;
+
+const PostHeader = styled.div`
+  display: flex;
+  align-items: center;
+  margin-bottom: var(--spacing-md);
+`;
+
+const PostAuthor = styled.span`
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-right: var(--spacing-sm);
+`;
+
+const PostDate = styled.span`
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+`;
+
+const PostContent = styled.p`
+  color: var(--text-primary);
+  line-height: 1.6;
+  margin: 0;
+`;
+
+const PostFooter = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: var(--spacing-md);
+  padding-top: var(--spacing-sm);
+  border-top: 1px solid rgba(0,0,0,0.1);
+  
+  @media (max-width: 768px) {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--spacing-sm);
+  }
+`;
+
+const InteractionButton = styled.a`
+  display: inline-flex;
+  align-items: center;
+  gap: var(--spacing-xs);
+  color: var(--text-secondary);
+  text-decoration: none;
+  padding: var(--spacing-xs) var(--spacing-sm);
+  border-radius: var(--border-radius);
+  transition: background-color 0.2s ease;
+  
+  &:hover {
+    background-color: rgba(0,0,0,0.05);
+    color: var(--primary);
+  }
+  
+  svg {
+    font-size: 1.2em;
+  }
+`;
 
 const PostsAll = () => {
-  const [posts, setPosts] = useState([])
+  const [posts, setPosts] = useState([]);
 
   useEffect(() => {
     const fetchAllPosts = async () => {
       try {
-        const res = await axios.get("http://localhost:3001/api/posts/all")
-        console.log(res.data)
-        setPosts(res.data)
+        const res = await axios.get('http://localhost:3000/api/posts/all');
+        console.log(res.data);
+        setPosts(res.data);
       } catch (err) {
-        console.log(err)
+        console.log(err);
       }
-    }
-    fetchAllPosts()
-  }, [])
+    };
+    fetchAllPosts();
+  }, []);
 
-  const handleLike = async (postId) => {
+  const handleLike = async postId => {
     try {
-      await axios.post(`http://localhost:3001/api/posts/${postId}/like`)
-      console.log("Post has been liked")
+      await axios.post(`http://localhost:3000/api/posts/${postId}/like`);
+      console.log('Post has been liked');
     } catch (err) {
-      console.error("Error liking post:", err)
+      console.error('Error liking post:', err);
     }
 
-    alert(`Liked Post ID: ${postId}`)
-  }
+    alert(`Liked Post ID: ${postId}`);
+  };
 
-  const handleDislike = async (postId) => {
+  const handleDislike = async postId => {
     // try {
     //   await axios.post(`http://localhost:3001/api/posts/${postId}/dislike`)
     //   setPosts((prevPosts) =>
@@ -44,54 +133,36 @@ const PostsAll = () => {
     //   console.error("Error disliking post:", err)
     // }
 
-    alert(`Disliked Post ID: ${postId}`)
-  }
+    alert(`Disliked Post ID: ${postId}`);
+  };
 
   return (
-    <>
-      <div className="container">
-        {/* Posts - All */}
-        <div className="row">
-          {posts.map((post) => (
-            <div key={post.id} className="col-md-12 mb-4 mt-4">
-              <div className="card">
-                <div className="card-body">
-                  <h6 className="card-subtitle mb-2 text-muted">
-                    <Link to={`/users/${post.username}`}>{post.username}</Link>
-                  </h6>
-                  <p className="card-text">{post.content}</p>
-                </div>
-                <div className="post-footer">
-                  <div className="post-footer-interactions">
-                    <a
-                      href="#"
-                      className="card-link"
-                      onClick={() => handleLike(post.id)}
-                    >
-                      <FaRegThumbsUp />
-                      {post.likes}
-                    </a>
-                    <a
-                      href="#"
-                      className="card-link"
-                      onClick={() => handleDislike(post.id)}
-                    >
-                      <FaRegThumbsDown />
-                      {post.dislikes}
-                    </a>
-                  </div>
-                  <div className="post-footer-timestamp">
-                    {moment(post.created_at).format("YYYY/MM/DD HH:mm:ss")}
-                  </div>
-                </div>
-              </div>
+    <PostsContainer>
+      {posts.map(post => (
+        <PostCard key={post.id}>
+          <PostHeader>
+            <PostAuthor>
+              <Link to={`/users/${post.username}`}>{post.username}</Link>
+            </PostAuthor>
+            <PostDate>
+              {moment(post.created_at).format('YYYY/MM/DD HH:mm:ss')}
+            </PostDate>
+          </PostHeader>
+          <PostContent>{post.content}</PostContent>
+          <PostFooter>
+            <div>
+              <InteractionButton href='#' onClick={() => handleLike(post.id)}>
+                <FaRegThumbsUp /> {post.likes}
+              </InteractionButton>
+              <InteractionButton href='#' onClick={() => handleDislike(post.id)}>
+                <FaRegThumbsDown /> {post.dislikes}
+              </InteractionButton>
             </div>
-          ))}
-        </div>
-        {/* End of Posts All */}
-      </div>
-    </>
-  )
-}
+          </PostFooter>
+        </PostCard>
+      ))}
+    </PostsContainer>
+  );
+};
 
-export default PostsAll
+export default PostsAll;
