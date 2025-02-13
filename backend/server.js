@@ -105,9 +105,10 @@ app.get('/api/posts/all', (req, res) => {
   db.query(query, (err, results) => {
     if (err) {
       console.error('Error executing query:', err.stack);
-      res.status(500).send('Server error');
-      return;
+      return res.status(500).json({ error: 'Server error' });
     }
+    
+    console.log('Posts fetched:', results); // Debug log
     res.json(results);
   });
 });

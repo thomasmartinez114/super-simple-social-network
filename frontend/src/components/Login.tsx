@@ -83,7 +83,7 @@ const Login = () => {
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const [success, setSuccess] = useState(false);
-  const navigate = useNavigate(); // Get the navigate function
+  const navigate = useNavigate();
 
   const handleUsernameChange = e => {
     setUsername(e.target.value);
