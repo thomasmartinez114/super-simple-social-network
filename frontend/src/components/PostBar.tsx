@@ -7,14 +7,13 @@ const PostBarContainer = styled.div`
   padding: var(--spacing-md);
   border-radius: var(--border-radius);
   box-shadow: var(--shadow-sm);
-  margin-bottom: var(--spacing-lg);
   width: 100%;
   max-width: 800px;
-  margin: 0 auto var(--spacing-lg);
+  margin: var(--spacing-xl) auto var(--spacing-lg);
   
   @media (max-width: 768px) {
     padding: var(--spacing-sm);
-    margin: 0 var(--spacing-sm) var(--spacing-md);
+    margin: var(--spacing-lg) var(--spacing-sm) var(--spacing-md);
     border-radius: var(--border-radius-sm);
   }
 `;
