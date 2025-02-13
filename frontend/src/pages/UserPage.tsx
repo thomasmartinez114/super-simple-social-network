@@ -83,55 +83,75 @@ const BackLink = styled(Link)`
   }
 `;
 
+interface UserStats {
+  postsCount: number;
+  likesReceived: number;
+}
+
+interface Post {
+  id: number;
+  content: string;
+  created_at: string;
+  likes: number;
+  dislikes: number;
+}
+
 const UserPage = () => {
   const username = localStorage.getItem('loggedUsername');
-  // const { username } = useParams()
-  const [posts, setPosts] = useState([]);
-  const [userStats, setUserStats] = useState({
+  const [posts, setPosts] = useState<Post[]>([]);
+  const [userStats, setUserStats] = useState<UserStats>({
     postsCount: 0,
     likesReceived: 0,
   });
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    const fetchUserPosts = async () => {
-      try {
-        const res = await axios.get(
-          `http://localhost:3000/api/user/${username}/posts`
-        );
-        console.log(res.data);
-        setPosts(res.data);
-      } catch (err) {
-        console.log(err);
-      }
-    };
-    fetchUserPosts();
-  }, []);
+    const fetchUserData = async () => {
+      if (!username) return;
 
-  useEffect(() => {
-    const fetchUserStats = async () => {
       try {
-        const response = await axios.get(
+        setLoading(true);
+
+        // Fetch user stats
+        const statsResponse = await axios.get(
           `http://localhost:3000/api/users/${username}/stats`
         );
-        setUserStats(response.data);
+        console.log('Stats response:', statsResponse.data);
+        setUserStats(statsResponse.data);
+
+        // Fetch user posts
+        const postsResponse = await axios.get(
+          `http://localhost:3000/api/user/${username}/posts`
+        );
+        console.log('Posts response:', postsResponse.data);
+        setPosts(postsResponse.data);
       } catch (error) {
-        console.error('Error fetching user stats:', error);
+        console.error('Error fetching user data:', error);
+        setError('Failed to load user data');
+      } finally {
+        setLoading(false);
       }
     };
 
-    if (username) {
-      fetchUserStats();
-    }
+    fetchUserData();
   }, [username]);
 
   if (!username) {
     return <div>Please log in to view your profile.</div>;
   }
 
+  if (loading) {
+    return <div>Loading...</div>;
+  }
+
+  if (error) {
+    return <div>Error: {error}</div>;
+  }
+
   return (
     <>
       <Navbar />
-
       <ProfileContainer>
         <BackLink to='/home'>← Back to Home</BackLink>
 
@@ -149,39 +169,30 @@ const UserPage = () => {
           </StatsContainer>
         </ProfileCard>
 
-        <div className='container'>
-          {/* <div className='user-profile-header'>
-            <h2>{username}'s Profile</h2>
-            <img src={defaultPhoto} alt='' className='user-profile-photo' />
-          </div> */}
-          <br />
-          <div className='row'>
-            {posts.map(post => (
-              <div key={post.id} className='col-md-12 mb-4 mt-4'>
-                <div className='card'>
-                  <div className='card-body'>
-                    <p className='card-text'>{post.content}</p>
-                  </div>
-                  <div className='post-footer'>
-                    <div className='post-footer-interactions'>
-                      {/* <a href="#" className="card-link" onClick={handleLike}>
-                        <FaRegThumbsUp />
-                        {post.likes}
-                      </a> */}
-                      {/* <a href="#" className="card-link" onClick={handleDislike}>
-                        <FaRegThumbsDown />
-                        {post.dislikes}
-                      </a> */}
+        {posts.length > 0 ? (
+          <div className='container'>
+            <div className='row'>
+              {posts.map(post => (
+                <div key={post.id} className='col-md-12 mb-4 mt-4'>
+                  <div className='card'>
+                    <div className='card-body'>
+                      <p className='card-text'>{post.content}</p>
                     </div>
-                    <div className='post-footer-timestamp'>
-                      {post.created_at}
+                    <div className='post-footer'>
+                      <div className='post-footer-timestamp'>
+                        {new Date(post.created_at).toLocaleString()}
+                      </div>
                     </div>
                   </div>
                 </div>
-              </div>
-            ))}
+              ))}
+            </div>
           </div>
-        </div>
+        ) : (
+          <div style={{ textAlign: 'center', marginTop: '2rem' }}>
+            No posts yet
+          </div>
+        )}
       </ProfileContainer>
     </>
   );

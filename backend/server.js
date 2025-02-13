@@ -186,22 +186,26 @@ app.post('/api/posts/:id/dislike', (req, res) => {
   });
 });
 
-// Add this new endpoint to get user stats
+// Update the user stats endpoint
 app.get('/api/users/:username/stats', async (req, res) => {
   const { username } = req.params;
   
   try {
     // Get posts count
-    const postsCountQuery = 'SELECT COUNT(*) as count FROM posts WHERE username = ?';
-    const [postsResult] = await db.query(postsCountQuery, [username]);
+    const postsCountQuery = 'SELECT COUNT(*) as postsCount FROM posts WHERE username = ?';
+    const [postsResult] = await db.promise().query(postsCountQuery, [username]);
     
-    // Get total likes received
-    const likesQuery = 'SELECT SUM(likes) as total FROM posts WHERE username = ?';
-    const [likesResult] = await db.query(likesQuery, [username]);
+    // Get total likes received (sum of likes from all posts)
+    const likesQuery = 'SELECT COALESCE(SUM(likes), 0) as likesReceived FROM posts WHERE username = ?';
+    const [likesResult] = await db.promise().query(likesQuery, [username]);
     
+    console.log('Stats for user:', username);
+    console.log('Posts count:', postsResult[0].postsCount);
+    console.log('Likes received:', likesResult[0].likesReceived);
+
     res.json({
-      postsCount: postsResult[0].count || 0,
-      likesReceived: likesResult[0].total || 0
+      postsCount: postsResult[0].postsCount || 0,
+      likesReceived: likesResult[0].likesReceived || 0
     });
   } catch (error) {
     console.error('Error fetching user stats:', error);
